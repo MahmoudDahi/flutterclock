@@ -142,6 +142,34 @@ class ClockPainter extends CustomPainter {
     canvas.drawCircle(center, raduis - 40, fillCircle);
     canvas.drawCircle(center, raduis - 40, storkeCircle);
 
+    var outerLine = raduis-52;
+    var innerLine = raduis - 72;
+    var innerShortLine = raduis - 60;
+
+    Paint dashBrash = Paint()
+      ..strokeWidth = 2
+      ..color = Colors.white;
+
+    for (int i = 0; i < 360; i += 30) {
+      var x1 = centerX + outerLine * cos(i * pi / 180);
+      var y1 = centerX + outerLine * sin(i * pi / 180);
+
+      var x2 = centerX + innerLine * cos(i * pi / 180);
+      var y2 = centerX + innerLine * sin(i * pi / 180);
+
+      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrash);
+    }
+
+    for (int i = 0; i < 360; i += 6) {
+      var x1 = centerX + innerLine * cos(i * pi / 180);
+      var y1 = centerX + innerLine * sin(i * pi / 180);
+
+      var x2 = centerX + innerShortLine * cos(i * pi / 180);
+      var y2 = centerX + innerShortLine * sin(i * pi / 180);
+
+      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrash);
+    }
+
     var hourX = centerX +
         50 * cos((dateTime.hour * 30 + dateTime.minute * 0.5) * pi / 180);
     var hourY = centerX +
@@ -158,35 +186,7 @@ class ClockPainter extends CustomPainter {
 
     canvas.drawCircle(center, 12, dotCircle);
 
-    var outerLine = raduis;
-    var innerLine = raduis - 20;
-    var innerShortLine = raduis - 10;
-
-    Paint dashBrash = Paint()
-      ..strokeWidth = 2
-      ..color = Colors.white;
-
-    for (int i = 0; i < 360; i += 30) {
-      var x1 = centerX + outerLine * cos(i * pi / 180);
-      var y1 = centerX + outerLine * sin(i * pi / 180);
-
-      var x2 = centerX + innerLine * cos(i * pi / 180);
-      var y2 = centerX + innerLine * sin(i * pi / 180);
-
-      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrash);
-    }
-
-    for (int i = 0; i < 360; i += 5) {
-      var x1 = centerX + innerLine * cos(i * pi / 180);
-      var y1 = centerX + innerLine * sin(i * pi / 180);
-
-      var x2 = centerX + innerShortLine * cos(i * pi / 180);
-      var y2 = centerX + innerShortLine * sin(i * pi / 180);
-
-      canvas.drawLine(Offset(x1, y1), Offset(x2, y2), dashBrash);
-    }
-
-   
+    
   }
 
   @override
